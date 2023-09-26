@@ -62,3 +62,14 @@ FROM spotify_2023
 WHERE 
   musical_key IS NULL;
 
+-- Top 10 Most Stream Artists
+SELECT *
+FROM (SELECT DISTINCT artists_name, 
+sum(streams) OVER(PARTITION BY artists_name) AS total_streams 
+FROM spotify_2023) a 
+ORDER BY a.total_streams DESC  
+LIMIT 10; 
+
+
+
+
